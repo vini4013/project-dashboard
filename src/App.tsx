@@ -1,9 +1,10 @@
 import { useState, useMemo } from 'react';
 import { mockProjects } from '@/data/mockProjects';
 import { ProjectStatus } from '@/types/project';
-import { filterProjects } from '@/utils/projectUtils';
+import { filterProjects, sortProjects, SortOption } from '@/utils/projectUtils';
 import SearchBar from '@/components/SearchBar';
 import StatusFilter from '@/components/StatusFilter';
+import SortDropdown from '@/components/SortDropdown';
 import ProjectList from '@/components/ProjectList';
 import ProjectDetail from '@/components/ProjectDetail';
 import './styles.css';
@@ -11,11 +12,13 @@ import './styles.css';
 export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatuses, setSelectedStatuses] = useState<ProjectStatus[]>([]);
+  const [sortBy, setSortBy] = useState<SortOption>('name');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
 
   const filteredProjects = useMemo(() => {
-    return filterProjects(mockProjects, searchTerm, selectedStatuses);
-  }, [searchTerm, selectedStatuses]);
+    const filtered = filterProjects(mockProjects, searchTerm, selectedStatuses);
+    return sortProjects(filtered, sortBy);
+  }, [searchTerm, selectedStatuses, sortBy]);
 
   const selectedProject = selectedProjectId
     ? mockProjects.find((p) => p.id === selectedProjectId)
@@ -40,10 +43,13 @@ export default function App() {
 
       <div className="filters">
         <SearchBar value={searchTerm} onChange={setSearchTerm} />
-        <StatusFilter
-          selectedStatuses={selectedStatuses}
-          onChange={setSelectedStatuses}
-        />
+        <div className="filter-row">
+          <StatusFilter
+            selectedStatuses={selectedStatuses}
+            onChange={setSelectedStatuses}
+          />
+          <SortDropdown value={sortBy} onChange={setSortBy} />
+        </div>
       </div>
 
       <div className="results-info">

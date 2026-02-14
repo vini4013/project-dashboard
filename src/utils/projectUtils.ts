@@ -1,5 +1,7 @@
 import { Project, ProjectStatus } from '@/types/project';
 
+export type SortOption = 'name' | 'startDate' | 'endDate' | 'status' | 'none';
+
 export const filterProjects = (
   projects: Project[],
   searchTerm: string,
@@ -18,6 +20,42 @@ export const filterProjects = (
 
     return matchesSearch && matchesStatus;
   });
+};
+
+export const sortProjects = (projects: Project[], sortBy: SortOption): Project[] => {
+  if (sortBy === 'none') return projects;
+
+  const sorted = [...projects];
+
+  switch (sortBy) {
+    case 'name':
+      return sorted.sort((a, b) => 
+        a.projectName.localeCompare(b.projectName)
+      );
+    
+    case 'startDate':
+      return sorted.sort((a, b) => 
+        new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+      );
+    
+    case 'endDate':
+      return sorted.sort((a, b) => 
+        new Date(a.endDate).getTime() - new Date(b.endDate).getTime()
+      );
+    
+    case 'status':
+      const statusOrder: Record<ProjectStatus, number> = {
+        'Active': 1,
+        'On Hold': 2,
+        'Completed': 3,
+      };
+      return sorted.sort((a, b) => 
+        statusOrder[a.status] - statusOrder[b.status]
+      );
+    
+    default:
+      return sorted;
+  }
 };
 
 export const formatDate = (dateString: string): string => {

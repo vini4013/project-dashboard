@@ -19,7 +19,7 @@ export default function ProjectDetail({ project, onClose }: ProjectDetailProps) 
         return '';
     }
   };
-
+  
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -55,22 +55,13 @@ export default function ProjectDetail({ project, onClose }: ProjectDetailProps) 
 
           <div className="detail-row">
             <span className="detail-label">Budget:</span>
-            <span className="detail-value">{formatCurrency(project.budget)}</span>
+            <span className={`detail-value ${project.budget ? '' : 'text-muted'}`}>{project.budget ? formatCurrency(project.budget) : 'No budget available'}</span>
           </div>
 
-          {project.description && (
             <div className="detail-row description">
-              <span className="detail-label">Description:</span>
-              <p className="detail-value">{project.description}</p>
+              <span className="detail-label">Description:</span> 
+              <p className={`detail-value ${project.description ? '' : 'text-muted'}`}>{project.description ? project.description : 'No description available'}</p>
             </div>
-          )}
-
-          {!project.description && (
-            <div className="detail-row">
-              <span className="detail-label">Description:</span>
-              <span className="detail-value text-muted">No description available</span>
-            </div>
-          )}
         </div>
       </div>
     </div>

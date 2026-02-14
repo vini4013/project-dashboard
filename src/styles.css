@@ -76,6 +76,18 @@ body {
   margin-bottom: 0;
 }
 
+.filter-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.filter-row .status-filter {
+  flex: 1;
+  min-width: 300px;
+}
+
 .status-options {
   display: flex;
   gap: 1.5rem;
@@ -95,6 +107,32 @@ body {
   width: 1.125rem;
   height: 1.125rem;
   cursor: pointer;
+}
+
+/* Sort Dropdown */
+.sort-dropdown {
+  min-width: 200px;
+}
+
+.sort-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.sort-select:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+.sort-select:hover {
+  border-color: #a0aec0;
 }
 
 /* Results Info */
@@ -139,8 +177,14 @@ body {
   font-weight: 600;
   color: #1a202c;
   line-height: 1.4;
-  word-break: break-word;
   flex: 1;
+  /* Truncate to 2 lines with ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 
 .project-card-body {

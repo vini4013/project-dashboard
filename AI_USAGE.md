@@ -6,21 +6,20 @@
 
 ## How AI Was Used
 
-### 1. Initial Setup (Fully AI-Assisted)
-- **What**: Project structure, package.json, TypeScript config, Next.js setup
+### 1. Initial Setup
+- **What**: Project structure, package.json, TypeScript config, react.js setup
 - **Why**: Standard boilerplate - no value in typing manually
-- **Result**: Accepted with minor tweaks to dependencies
+- **Result**: Accepted with minor tweaks to dependencies- Removed next.js and vite
 
-### 2. Mock Data Generation (AI-Assisted)
-- **What**: Created 10 diverse project entries
-- **Prompt**: "Generate realistic project data with edge cases"
+### 2. Mock Data Generation 
+- **What**: Created 13 diverse project entries
 - **Modified**: 
   - Added project #10 with intentionally long names to test overflow
   - Ensured variety in statuses and date ranges
   - Made some descriptions optional to test edge cases
 - **Result**: Mostly accepted, enhanced edge case coverage manually
 
-### 3. Component Structure (Collaborative)
+### 3. Component Structure 
 - **What**: Initial component scaffolding
 - **AI Generated**: 
   - Basic component templates
@@ -29,9 +28,8 @@
 - **Modified**:
   - Refactored StatusFilter from dropdown to multi-select checkboxes (better UX)
   - Changed ProjectDetail routing approach from separate page to modal
-  - Simplified ProjectCard structure for better readability
 
-### 4. Filtering Logic (AI-Assisted, Validated)
+### 4. Filtering Logic 
 - **What**: `filterProjects` utility function
 - **AI Generated**: Core filtering logic with immutability
 - **Verified**: 
@@ -43,16 +41,18 @@
 ### 5. Styling (Mixed)
 - **AI Generated**: Initial CSS structure and layout
 - **Modified**:
-  - Adjusted color scheme for better contrast
-  - Fine-tuned spacing and responsive breakpoints
-  - Improved modal overlay opacity
-  - Enhanced hover states on cards
-- **Reason**: AI often produces functional but generic styles
+  - Minor tweeks
+  - trunicated project names spanning more than 2 lines.
+- **Result**: Mostly accepted with minor tweeks
 
 ## What I Changed or Rejected
 
+### ❌ Rejected: Next.js and Vite
+- **Why Rejected**: Seemed like an overkill for this scope
+- **Replaced With**: Plain React
+
+
 ### ❌ Rejected: Separate Route for Detail View
-- **AI Suggested**: Using Next.js dynamic routes `[id]` for detail pages
 - **Why Rejected**: Overkill for this scope, modal is simpler and faster
 - **Replaced With**: Modal overlay with backdrop
 
@@ -66,74 +66,10 @@
 - **Why Changed**: Multi-select checkboxes are more powerful for filtering
 - **Result**: Better UX, all filters visible at once
 
-### ⚠️ Modified: Empty State Messaging
-- **AI Generated**: Generic "No data" message
-- **Enhanced**: Different messages for "no projects" vs "no results after filtering"
 
 ## What I Don't Fully Agree With
 
-### 1. Component File Structure
-**AI Output**: Flat components folder
-**My Preference**: Group related components (e.g., `components/filters/`, `components/projects/`)
-**Why I Kept It**: For 5 components, flat structure is fine. Would refactor if scaling beyond 10 components.
-
-### 2. Global CSS File
-**AI Output**: Single large `globals.css` file
-**My Preference**: CSS Modules or styled-components for better scoping
-**Why I Kept It**: Assignment emphasizes simplicity over cleverness. Plain CSS is more explicit and easier to review.
-
-### 3. useMemo Usage
+### 1. useMemo Usage
 **AI Generated**: Memoized filtered results
 **My Take**: Technically correct, but probably premature optimization for 10 items
 **Why I Kept It**: Demonstrates understanding of performance considerations. Doesn't hurt, and would matter at scale.
-
-## Code I Fully Understand
-
-I can explain and defend:
-- ✅ Every component's responsibility and why it's structured that way
-- ✅ The filtering algorithm and why it doesn't mutate data
-- ✅ State management choices (useState vs context vs external state)
-- ✅ Why modal over routing for detail view
-- ✅ Edge case handling strategy
-- ✅ TypeScript interfaces and type safety decisions
-
-## Testing Approach
-
-**AI Involvement**: None
-**Manual Testing**: 
-- Tested all filter combinations manually
-- Verified edge cases (long names, missing fields, empty states)
-- Checked responsive behavior on mobile viewport
-- Validated keyboard navigation works
-
-**Why No Automated Tests**: Assignment doesn't require them, and manual testing was sufficient for this scope. In production, I'd add Jest + RTL.
-
-## Prompt Engineering Examples
-
-### Good Prompt (Used)
-> "Create a project dashboard with filtering. Use Next.js, TypeScript, functional components only. No Tailwind. Handle edge cases like empty states and long text."
-
-**Result**: Got exactly what I needed with clear constraints.
-
-### What I Avoided
-❌ "Build me a dashboard" - Too vague
-❌ "Make it look good" - Against assignment focus
-❌ "Add all the features" - Leads to over-engineering
-
-## Time Breakdown
-
-- AI-generated code: ~40%
-- Reviewing and testing AI code: ~25%
-- Manual modifications and refinements: ~25%
-- Documentation: ~10%
-
-## Conclusion
-
-AI was a **force multiplier** but not a replacement for judgment:
-- ✅ Excellent for boilerplate and structure
-- ✅ Good for initial implementations
-- ⚠️ Requires validation for logic correctness
-- ⚠️ Needs human judgment for architecture decisions
-- ❌ Not suitable for edge case discovery (that's still human work)
-
-**Bottom Line**: I own this code. I can explain every line and defend every decision. AI was a tool, not a crutch.

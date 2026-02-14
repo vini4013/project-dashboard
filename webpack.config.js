@@ -1,12 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
+module.exports = (env, argv) => {
+  const isProduction = argv.mode === 'production';
+  
+  return {
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
     clean: true,
+    publicPath: isProduction ? '/project-dashboard/' : '/',
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -41,4 +45,5 @@ module.exports = {
     hot: true,
     open: true,
   },
+};
 };

@@ -23,7 +23,9 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
   return (
     <div className="project-card" onClick={onClick}>
       <div className="project-card-header">
-        <h3 className="project-name">{project.projectName}</h3>
+        <h3 className="project-name" >
+          {project.projectName}
+        </h3>
         <span className={`status-badge ${getStatusClass(project.status)}`}>
           {project.status}
         </span>
