@@ -2,6 +2,9 @@
 
 A clean, functional project management dashboard built with Next.js and TypeScript.
 
+## Live Demo
+https://vini4013.github.io/project-dashboard/
+
 ## Setup Instructions
 
 ### Prerequisites
@@ -79,28 +82,6 @@ If this were a real project, I would consider:
 3. **Persist filters** in localStorage or URL params
 4. **Accessibility improvements** (ARIA labels, keyboard navigation)
 
-
-## Project Structure
-
-```
-src/
-├── app/
-│   ├── layout.tsx          # Root layout
-│   ├── page.tsx            # Main dashboard page
-│   └── globals.css         # Global styles
-├── components/
-│   ├── ProjectCard.tsx     # Individual project card
-│   ├── ProjectDetail.tsx   # Detail modal
-│   ├── ProjectList.tsx     # List container + empty state
-│   ├── SearchBar.tsx       # Search input
-│   └── StatusFilter.tsx    # Multi-select status filter
-├── data/
-│   └── mockProjects.ts     # Mock data (10 projects)
-├── types/
-│   └── project.ts          # TypeScript interfaces
-└── utils/
-    └── projectUtils.ts     # Filtering and formatting logic
-```
 
 
 ## Technology Stack
